@@ -18,10 +18,10 @@ public class HGUCoursePatternAnalyzer {
 						"2019-1, SJ Kim, Logic Design",
 						"2019-1, SJ Kim, Algorithm Analysis",
 						};
-
+	
 	int numOfStudents;
 	int numOfCourses;
-	Student[] students;
+	Student[] students ;
 	Course[] courses;
 	
 	/**
@@ -54,11 +54,23 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
-		
+		String name;
+		Student[] test = new Student[12];
+		int i=0;
 		// TODO: implement this method
 		
+		for(String student : lines) {
+			name=student.trim().split(", ")[1];
+			
+			if(studentExist(test, test[i])) {
+				test[i]=new Student(name);
+				i++;
+			}
+			
+		}
 		
-		return null;
+		
+		return test;
 	}
 
 	/**
@@ -70,7 +82,13 @@ public class HGUCoursePatternAnalyzer {
 	private boolean studentExist(Student[] students, Student student) {
 		
 		// TODO: implement this method
-
+		
+		for(Student e : students ) {
+			if(e==student) {
+				
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -80,10 +98,19 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
-		
+		String course;
+		Course[] test = new Course[12];
+		int i=0;
 		// TODO: implement this method
 		
-		return null;
+		for(String student : lines) {
+			course=student.trim().split(", ")[2];
+			test[i]=new Course(course);
+			i++;
+		}
+		
+		
+		return test;
 	}
 
 	/**
