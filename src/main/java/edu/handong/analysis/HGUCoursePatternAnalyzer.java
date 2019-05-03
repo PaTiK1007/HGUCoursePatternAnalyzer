@@ -15,8 +15,8 @@ public class HGUCoursePatternAnalyzer {
 						"2019-1, SB Lim, Algorithm Analysis",
 						"2018-1, SJ Kim, Java Programming",
 						"2018-2, SJ Kim, Programming Language Theory",
-						"2019-1, SJ Kim, Logic Design",
 						"2019-1, SJ Kim, Algorithm Analysis",
+						"2019-1, SJ Kim, Logic Design"
 						};
 	
 	int numOfStudents;
@@ -55,20 +55,21 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		String name;
-		Student[] test = new Student[12];
+		Student[] test = new Student[numOfStudents];
 		int i=0;
 		// TODO: implement this method
 		
 		for(String student : lines) {
+			
 			name=student.trim().split(", ")[1];
+			test[i]=new Student(name);
 			
-			if(studentExist(test, test[i])) {
-				test[i]=new Student(name);
+			if(i<numOfStudents-1||studentExist(test, test[i])==false) {
 				i++;
+			}else {
+				i--;
 			}
-			
-		}
-		
+		}	
 		
 		return test;
 	}
@@ -81,11 +82,9 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean studentExist(Student[] students, Student student) {
 		
-		// TODO: implement this method
-		
-		for(Student e : students ) {
-			if(e==student) {
-				
+		for(Student e: students) {
+			
+			if(e.getName() == student.getName()) {
 				return true;
 			}
 		}
@@ -99,14 +98,20 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
 		String course;
-		Course[] test = new Course[12];
+		Course[] test = new Course[numOfCourses];
 		int i=0;
 		// TODO: implement this method
 		
-		for(String student : lines) {
-			course=student.trim().split(", ")[2];
+			for(String courses : lines) {
+			
+			course=courses.trim().split(", ")[2];
 			test[i]=new Course(course);
-			i++;
+			
+			if(i<numOfCourses-1||courseExist(test, test[i])==false) {
+				i++;
+			}else {
+				i--;
+			}
 		}
 		
 		
@@ -121,8 +126,13 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
 		
-		// TODO: implement this method
-
+		for(Course e: courses) {
+			
+			if(e.getCourseName() == course.getCourseName()) {
+				return true;
+			}
+		}
+	
 		return false;
 	}
 
