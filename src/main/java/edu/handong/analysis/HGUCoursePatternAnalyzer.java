@@ -15,8 +15,8 @@ public class HGUCoursePatternAnalyzer {
 						"2019-1, SB Lim, Algorithm Analysis",
 						"2018-1, SJ Kim, Java Programming",
 						"2018-2, SJ Kim, Programming Language Theory",
+						"2019-1, SJ Kim, Logic Design",
 						"2019-1, SJ Kim, Algorithm Analysis",
-						"2019-1, SJ Kim, Logic Design"
 						};
 	
 	int numOfStudents;
@@ -55,23 +55,33 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private Student[] initiateStudentArrayFromLines(String[] lines) {
 		String name;
-		Student[] test = new Student[numOfStudents];
+		Student[] last = new Student[numOfStudents];
+		Student test;
+		for(int i=0;i<numOfStudents;i++) {
+			last[i] = new Student("0");
+		}
 		int i=0;
+		
+		
 		// TODO: implement this method
 		
 		for(String student : lines) {
 			
-			name=student.trim().split(", ")[1];
-			test[i]=new Student(name);
 			
-			if(i<numOfStudents-1||studentExist(test, test[i])==false) {
+			name=student.trim().split(", ")[1];
+			test=new Student(name);
+			
+			if(i==0) {
+				last[i]=new Student(name);
 				i++;
-			}else {
-				i--;
 			}
+			else if(studentExist(last, test)== false){
+				last[i]=test;
+				i++;
+			}
+			
 		}	
-		
-		return test;
+		return last;
 	}
 
 	/**
@@ -82,9 +92,9 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean studentExist(Student[] students, Student student) {
 		
-		for(Student e: students) {
+		for(int i=0;i<numOfStudents;i++) {
 			
-			if(e.getName() == student.getName()) {
+			if(students[i].getName().equals(student.getName())) {
 				return true;
 			}
 		}
@@ -97,25 +107,34 @@ public class HGUCoursePatternAnalyzer {
 	 * @return
 	 */
 	private Course[] initiateCourseArrayFromLines(String[] lines) {
-		String course;
-		Course[] test = new Course[numOfCourses];
+		String name;
+		Course[] last = new Course[numOfCourses];
+		Course test;
+		for(int i=0;i<numOfCourses;i++) {
+			last[i] = new Course("0");
+		}
 		int i=0;
+		
+		
 		// TODO: implement this method
 		
-			for(String courses : lines) {
+		for(String student : lines) {
 			
-			course=courses.trim().split(", ")[2];
-			test[i]=new Course(course);
 			
-			if(i<numOfCourses-1||courseExist(test, test[i])==false) {
+			name=student.trim().split(", ")[2];
+			test=new Course(name);
+			
+			if(i==0) {
+				last[i]=new Course(name);
 				i++;
-			}else {
-				i--;
 			}
-		}
-		
-		
-		return test;
+			else if(courseExist(last, test)== false){
+				last[i]=test;
+				i++;
+			}
+			
+		}	
+		return last;
 	}
 
 	/**
@@ -126,13 +145,12 @@ public class HGUCoursePatternAnalyzer {
 	 */
 	private boolean courseExist(Course[] courses, Course course) {
 		
-		for(Course e: courses) {
+		for(int i=0;i<numOfCourses;i++) {
 			
-			if(e.getCourseName() == course.getCourseName()) {
+			if(courses[i].getCourseName().equals(course.getCourseName())) {
 				return true;
 			}
 		}
-	
 		return false;
 	}
 
