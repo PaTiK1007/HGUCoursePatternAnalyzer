@@ -62,20 +62,13 @@ public class HGUCoursePatternAnalyzer {
 		}
 		int i=0;
 		
-		
-		// TODO: implement this method
-		
 		for(String student : lines) {
 			
 			
 			name=student.trim().split(", ")[1];
 			test=new Student(name);
 			
-			if(i==0) {
-				last[i]=new Student(name);
-				i++;
-			}
-			else if(studentExist(last, test)== false){
+			if(studentExist(last, test)== false){
 				last[i]=test;
 				i++;
 			}
@@ -116,19 +109,13 @@ public class HGUCoursePatternAnalyzer {
 		int i=0;
 		
 		
-		// TODO: implement this method
-		
-		for(String student : lines) {
+		for(String course : lines) {
 			
 			
-			name=student.trim().split(", ")[2];
+			name=course.trim().split(", ")[2];
 			test=new Course(name);
 			
-			if(i==0) {
-				last[i]=new Course(name);
-				i++;
-			}
-			else if(courseExist(last, test)== false){
+			if(courseExist(last, test)== false){
 				last[i]=test;
 				i++;
 			}
